@@ -5,7 +5,7 @@ import 'package:flutter_gemini/hive/user_model.dart';
 import 'package:hive/hive.dart';
 
 class Boxes {
-  // get the caht history box
+  // get the chat history box
   static Box<ChatHistory> getChatHistory() =>
       Hive.box<ChatHistory>(Constants.chatHistoryBox);
 

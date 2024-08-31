@@ -4,6 +4,7 @@ import 'package:flutter_gemini/utility/utilites.dart';
 import 'package:flutter_gemini/widgets/bottom_chat_field.dart';
 import 'package:flutter_gemini/widgets/chat_messages.dart';
 import 'package:provider/provider.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key});
@@ -54,7 +55,7 @@ class _ChatScreenState extends State<ChatScreen> {
           appBar: AppBar(
             backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
             centerTitle: true,
-            title: const Text('Chat with Gemini'),
+            title: const Text('Chat with AI'),
             actions: [
               if (chatProvider.inChatMessages.isNotEmpty)
                 Padding(
@@ -76,6 +77,8 @@ class _ChatScreenState extends State<ChatScreen> {
                                   isNewChat: true, chatID: '');
                             }
                           },
+                          titleStyle: TextStyle(color: Colors.purple),
+                          contentStyle: TextStyle(color: Colors.purple),
                         );
                       },
                     ),
@@ -90,8 +93,40 @@ class _ChatScreenState extends State<ChatScreen> {
                 children: [
                   Expanded(
                     child: chatProvider.inChatMessages.isEmpty
-                        ? const Center(
-                            child: Text('No messages yet'),
+                        ? Center(
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                const Text(
+                                  'Start a',
+                                  style: TextStyle(
+                                    fontSize: 24.0,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                                const SizedBox(width: 10.0),
+                                DefaultTextStyle(
+                                  style: const TextStyle(
+                                    fontSize: 24.0,
+                                    color: Colors.blue,
+                                    fontFamily: 'Horizon',
+                                  ),
+                                  child: AnimatedTextKit(
+                                    animatedTexts: [
+                                      RotateAnimatedText('Coding'),
+                                      RotateAnimatedText('Chat'),
+                                      RotateAnimatedText('Image Chat'),
+                                      RotateAnimatedText('Talk'),
+                                      RotateAnimatedText('Photo Sharing'),
+                                    ],
+                                    onTap: () {
+                                      print("Tap Event");
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
                           )
                         : ChatMessages(
                             scrollController: _scrollController,

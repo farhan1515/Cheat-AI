@@ -7,10 +7,10 @@ class EmptyHistoryWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return Center(
       child: GestureDetector(
         onTap: () async {
-          // navigate to chat screen
           // navigate to chat screen
           final chatProvider = context.read<ChatProvider>();
           // prepare chat room
@@ -31,7 +31,10 @@ class EmptyHistoryWidget extends StatelessWidget {
           child: const Padding(
             padding: EdgeInsets.all(8.0),
             child: Text(
-              'No chat foune, start a new chat!',
+              'No chat found, Start a new chat!',
+              style: TextStyle(
+                color: Colors.blueGrey, // Ensures visibility in dark mode
+              ),
             ),
           ),
         ),

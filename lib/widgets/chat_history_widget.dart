@@ -45,7 +45,9 @@ class ChatHistoryWidget extends StatelessWidget {
           // show my animated dialog to delete the chat
           showMyAnimatedDialog(
             context: context,
+            
             title: 'Delete Chat',
+            
             content: 'Are you sure you want to delete this chat?',
             actionText: 'Delete',
             onActionPressed: (value) async {
@@ -59,6 +61,14 @@ class ChatHistoryWidget extends StatelessWidget {
                 await chat.delete();
               }
             },
+            
+             titleStyle: TextStyle(
+              color: Colors.purple
+            ), contentStyle: TextStyle(
+              color: Colors.purple
+            ),
+            
+         
           );
         },
       ),

@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "602160717104",
+    "project_id": "document-summarizer-733b5",
+    "storage_bucket": "document-summarizer-733b5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:602160717104:android:72b8c9b450972cefb87cf5",
+        "android_client_info": {
+          "package_name": "com.example.flutter_gemini"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "602160717104-vmipj286o9cipdoa6upf6uu5lbhholh5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.flutter_gemini",
+            "certificate_hash": "b73b19b2a230af261942e13ceed69355e245a4af"
+          }
+        },
+        {
+          "client_id": "602160717104-itgva63tp37gko73r0nbko8uif2tue82.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSK-8ika2KSFXKOWVcq_3NXdWX87GbvJA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "602160717104-itgva63tp37gko73r0nbko8uif2tue82.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "602160717104-fbm2gn9sp1p6gemscdae6ftthl7bparq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.flutterGemini.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:602160717104:android:8863fd65aee841c8b87cf5",
+        "android_client_info": {
+          "package_name": "com.techmindinnovations15.cheat_ai"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "602160717104-8cpvguqe5rlveeh6vg76ldpa352be5i3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.techmindinnovations15.cheat_ai",
+            "certificate_hash": "b73b19b2a230af261942e13ceed69355e245a4af"
+          }
+        },
+        {
+          "client_id": "602160717104-itgva63tp37gko73r0nbko8uif2tue82.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSK-8ika2KSFXKOWVcq_3NXdWX87GbvJA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "602160717104-itgva63tp37gko73r0nbko8uif2tue82.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "602160717104-fbm2gn9sp1p6gemscdae6ftthl7bparq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.flutterGemini.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

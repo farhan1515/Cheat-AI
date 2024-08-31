@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class Constants {
   static const String chatHistoryBox = 'chat_history';
   static const String userBox = 'user_box';
@@ -7,3 +9,7 @@ class Constants {
 
   static const String geminiDB = 'gemini.db';
 }
+late Size mq;
+
+String appName='Cheat AI';
+

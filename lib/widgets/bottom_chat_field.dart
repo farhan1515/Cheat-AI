@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gemini/providers/chat_provider.dart';
 import 'package:flutter_gemini/utility/utilites.dart';
 import 'package:flutter_gemini/widgets/preview_images_widget.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 
 class BottomChatField extends StatefulWidget {
@@ -91,16 +92,18 @@ class _BottomChatFieldState extends State<BottomChatField> {
                   if (hasImages) {
                     // show the delete dialog
                     showMyAnimatedDialog(
-                        context: context,
-                        title: 'Delete Images',
-                        content: 'Are you sure you want to delete the images?',
-                        actionText: 'Delete',
-                        onActionPressed: (value) {
-                          if (value) {
-                            widget.chatProvider
-                                .setImagesFileList(listValue: []);
-                          }
-                        });
+                      context: context,
+                      title: 'Delete Images',
+                      content: 'Are you sure you want to delete the images?',
+                      actionText: 'Delete',
+                      onActionPressed: (value) {
+                        if (value) {
+                          widget.chatProvider.setImagesFileList(listValue: []);
+                        }
+                      },
+                      titleStyle: TextStyle(color: Colors.purple),
+                      contentStyle: TextStyle(color: Colors.purple),
+                    );
                   } else {
                     pickImage();
                   }
@@ -115,6 +118,10 @@ class _BottomChatFieldState extends State<BottomChatField> {
                   focusNode: textFieldFocus,
                   controller: textController,
                   textInputAction: TextInputAction.send,
+                  style: GoogleFonts.ubuntu(
+                    color: Colors.blue,
+                    letterSpacing: 1.1,
+                  ),
                   onSubmitted: widget.chatProvider.isLoading
                       ? null
                       : (String value) {
@@ -128,7 +135,7 @@ class _BottomChatFieldState extends State<BottomChatField> {
                           }
                         },
                   decoration: InputDecoration.collapsed(
-                      hintText: 'Enter  a promt...',
+                      hintText: 'Ask me Friend 🤔',
                       border: OutlineInputBorder(
                         borderSide: BorderSide.none,
                         borderRadius: BorderRadius.circular(30),
@@ -150,13 +157,14 @@ class _BottomChatFieldState extends State<BottomChatField> {
                       },
                 child: Container(
                     decoration: BoxDecoration(
-                      color: Colors.deepPurple,
+                      color: Colors.green,
                       borderRadius: BorderRadius.circular(20),
                     ),
                     margin: const EdgeInsets.all(5.0),
                     child: const Padding(
                       padding: EdgeInsets.all(8.0),
-                      child: Icon(Icons.arrow_upward, color: Colors.white),
+                      child: Icon(Icons.rocket_launch_rounded,
+                          color: Colors.white),
                     )),
               )
             ],

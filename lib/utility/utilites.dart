@@ -7,6 +7,8 @@ void showMyAnimatedDialog({
   required String content,
   required String actionText,
   required Function(bool) onActionPressed,
+  required TextStyle titleStyle,
+  required TextStyle contentStyle,
 }) async {
   showGeneralDialog(
       context: context,
@@ -22,6 +24,7 @@ void showMyAnimatedDialog({
           child: FadeTransition(
             opacity: animation,
             child: AlertDialog(
+              backgroundColor: const Color(0xFFfffacd),
               title: Text(
                 title,
                 textAlign: TextAlign.center,
@@ -36,13 +39,17 @@ void showMyAnimatedDialog({
                       onActionPressed(false);
                       Navigator.of(context).pop();
                     },
-                    child: const Text('Cancel')),
+                    child: const Text(
+                      'Cancel',
+                      style: TextStyle(color: Colors.lightBlue),
+                    )),
                 TextButton(
                     onPressed: () {
                       onActionPressed(true);
                       Navigator.of(context).pop();
                     },
-                    child: Text(actionText)),
+                    child:
+                        Text(actionText, style: TextStyle(color: Colors.red))),
               ],
             ),
           ),
