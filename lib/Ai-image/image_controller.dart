@@ -3,12 +3,13 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_gemini/Ai-image/my_dailog.dart';
 import 'package:flutter_gemini/api/app_write.dart';
+
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'package:share_plus/share_plus.dart';
 import 'package:stability_image_generation/stability_image_generation.dart';
-import 'package:gallery_saver_updated/gallery_saver.dart';
+
 
 
 
@@ -49,33 +50,33 @@ class ImageController extends GetxController {
     }
   }
 
-  void downloadImage() async {
-    try {
-      if (imageBytes == null) {
-        Get.snackbar("Error", "No image to download");
-        return;
-      }
-      MyDialog.showLoadingDialog();
+  // void downloadImage() async {
+  //   try {
+  //     if (imageBytes == null) {
+  //       Get.snackbar("Error", "No image to download");
+  //       return;
+  //     }
+  //     MyDialog.showLoadingDialog();
 
-      final dir = await getTemporaryDirectory();
-      final file =
-          await File('${dir.path}/ai_image.png').writeAsBytes(imageBytes!);
+  //     final dir = await getTemporaryDirectory();
+  //     final file =
+  //         await File('${dir.path}/ai_image.png').writeAsBytes(imageBytes!);
 
-      // Using gallery_saver_updated package to save the image to the gallery
-      await GallerySaver.saveImage(file.path, albumName: 'AI ArtBuddy')
-          .then((success) {
-        Get.back();
-        if (success!) {
-          MyDialog.success("Image Downloaded to Gallery!");
-        } else {
-          MyDialog.error("Failed to download image!");
-        }
-      });
-    } catch (e) {
-      Get.back();
-      MyDialog.error("Something Went Wrong (Try again in Sometime)!");
-    }
-  }
+  //     // Using gallery_saver_updated package to save the image to the gallery
+  //     await GallerySaver.saveImage(file.path, albumName: 'AI ArtBuddy')
+  //         .then((success) {
+  //       Get.back();
+  //       if (success!) {
+  //         MyDialog.success("Image Downloaded to Gallery!");
+  //       } else {
+  //         MyDialog.error("Failed to download image!");
+  //       }
+  //     });
+  //   } catch (e) {
+  //     Get.back();
+  //     MyDialog.error("Something Went Wrong (Try again in Sometime)!");
+  //   }
+  // }
 
   void ShareImage() async {
     try {

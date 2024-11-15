@@ -33,7 +33,7 @@ class _ImageFeatureState extends State<ImageFeature> {
   void _loadInterstitialAd() {
     InterstitialAd.load(
       adUnitId:
-          'ca-app-pub-3423774690631144/1220611814', // Replace with your actual ad unit ID
+          'ca-app-pub-3423774690631144/4728000579', // Replace with your actual ad unit ID
       request: AdRequest(),
       adLoadCallback: InterstitialAdLoadCallback(
         onAdLoaded: (ad) {
@@ -116,7 +116,7 @@ class _ImageFeatureState extends State<ImageFeature> {
               child: FloatingActionButton(
                 onPressed: () {
                   FocusScope.of(context).unfocus();
-                  _c.downloadImage();
+                  // _c.downloadImage();
                 },
                 backgroundColor: Colors.purple.shade600,
                 shape: const RoundedRectangleBorder(

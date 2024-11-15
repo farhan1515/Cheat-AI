@@ -4,11 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gemini/hive/boxes.dart';
 import 'package:flutter_gemini/hive/user_model.dart';
 import 'package:flutter_gemini/providers/settings_provider.dart';
+
 import 'package:flutter_gemini/widgets/settings_tile.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-import '../document-summarizer/native_ad_widget.dart';
+
 import '../hive/settings.dart';
 import '../widgets/build_diaplay_image.dart';
 // Import the native ad widget
@@ -90,7 +91,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.of(context).size.height;
+    // final screenHeight = MediaQuery.of(context).size.height;
+    // final screenwidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Profile'),
@@ -173,11 +175,31 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   }
                 },
               ),
-              const SizedBox(height: 40.0),
-              Container(
-                height: screenHeight * 0.4, // Adjust height as needed
-                child: NativeAdWidget(), // Display the native ad here
-              ), // Add the native ad here
+              // const SizedBox(height: 40.0),
+              // GestureDetector(
+              //   onTap: () {
+              //     Navigator.push(
+              //       context,
+              //       MaterialPageRoute(
+              //         builder: (context) => HelpScreen(),
+              //       ),
+              //     );
+              //   },
+              //   child: Container(
+              //     child: SizedBox(
+              //       height: screenHeight * 0.2,
+              //       child: Text(
+              //         'Help',
+              //         style: TextStyle(color: Colors.black),
+              //       ),
+              //     ),
+              //   ),
+              // ),
+
+              // Container(
+              //   height: screenHeight * 0.4, // Adjust height as needed
+              //   child: NativeAdWidget(), // Display the native ad here
+              // ), // Add the native ad here
             ],
           ),
         ),

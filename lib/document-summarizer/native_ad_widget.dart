@@ -14,7 +14,7 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
   void initState() {
     super.initState();
     _nativeAd = NativeAd(
-      adUnitId: 'ca-app-pub-3423774690631144/9215486053',
+      adUnitId: 'ca-app-pub-3423774690631144/2665648283',
       request: AdRequest(),
       nativeTemplateStyle:
           NativeTemplateStyle(templateType: TemplateType.medium),

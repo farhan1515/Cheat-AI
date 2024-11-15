@@ -31,7 +31,7 @@ class _PdfScreenState extends State<PdfScreen> {
 
   void _loadInterstitialAd() {
     InterstitialAd.load(
-      adUnitId: 'ca-app-pub-3423774690631144/1220611814', // Replace with your actual ad unit ID
+      adUnitId: 'ca-app-pub-3423774690631144/4728000579', // Replace with your actual ad unit ID
       request: AdRequest(),
       adLoadCallback: InterstitialAdLoadCallback(
         onAdLoaded: (ad) {

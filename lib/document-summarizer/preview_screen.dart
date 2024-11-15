@@ -28,7 +28,7 @@ class _PreviewScreenState extends State<PreviewScreen> {
   void _loadInterstitialAd() {
     InterstitialAd.load(
       adUnitId:
-          'ca-app-pub-3423774690631144/1220611814', // Replace with your Ad Unit ID
+          'ca-app-pub-3423774690631144/4728000579', // Replace with your Ad Unit ID
       request: const AdRequest(),
       adLoadCallback: InterstitialAdLoadCallback(
         onAdLoaded: (InterstitialAd ad) {

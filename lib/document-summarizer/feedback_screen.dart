@@ -183,9 +183,14 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                   ),
                 ),
               ),
-              Container(
-                height: constraints.maxHeight * 0.3, // Adjust height as needed
-                child: NativeAdWidget(), // Display the native ad here
+              SizedBox(height: 5),
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Container(
+                  height:
+                      constraints.maxHeight * 0.3, // Adjust height as needed
+                  child: NativeAdWidget(), // Display the native ad here
+                ),
               ),
             ],
           );

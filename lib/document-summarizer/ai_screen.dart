@@ -26,7 +26,7 @@ class _AiScreenState extends State<AiScreen>
 
   late BannerAd _bannerAd;
   bool _isAdLoaded = false;
-  final String adUnitId = "ca-app-pub-3423774690631144/3615842881";
+  final String adUnitId = "ca-app-pub-3423774690631144/7354163912";
   @override
   void initState() {
     super.initState();
@@ -268,7 +268,7 @@ class _AiScreenState extends State<AiScreen>
 
   void _launchURL() async {
     final url = Uri.parse(
-        'https://play.google.com/store/apps/details?id=com.techmindinnovations15.cheat_ai');
+        'https://play.google.com/store/apps/details?id=com.technova15.cheat_ai');
     if (await canLaunchUrl(url)) {
       await launchUrl(url);
     } else {
@@ -344,7 +344,7 @@ class _AiScreenState extends State<AiScreen>
                     color: Color.fromRGBO(79, 33, 112, 1))),
             onTap: () {
               Share.share(
-                'Check out this awesome app: Cheat AI ! Download it from the Play Store: https://play.google.com/store/apps/details?id=com.techmindinnovations15.cheat_ai',
+                'Check out this awesome app: Cheat AI ! Download it from the Play Store: https://play.google.com/store/apps/details?id=com.technova15.cheat_ai',
                 subject: 'Check out this app!',
               );
             },
