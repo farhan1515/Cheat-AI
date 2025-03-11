@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gemini/Ai-image/custom_btn.dart';
 import 'package:flutter_gemini/Ai-image/image_controller.dart';
+import 'package:flutter_gemini/utils/permission_handler.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
-
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class ImageFeature extends StatefulWidget {
@@ -32,8 +32,7 @@ class _ImageFeatureState extends State<ImageFeature> {
 
   void _loadInterstitialAd() {
     InterstitialAd.load(
-      adUnitId:
-          'ca-app-pub-3423774690631144/4728000579', // Replace with your actual ad unit ID
+      adUnitId: 'ca-app-pub-3423774690631144/4728000579',
       request: AdRequest(),
       adLoadCallback: InterstitialAdLoadCallback(
         onAdLoaded: (ad) {
@@ -53,12 +52,12 @@ class _ImageFeatureState extends State<ImageFeature> {
         onAdDismissedFullScreenContent: (ad) {
           ad.dispose();
           Navigator.of(context).pop();
-          _loadInterstitialAd(); // Load the next ad
+          _loadInterstitialAd();
         },
         onAdFailedToShowFullScreenContent: (ad, error) {
           ad.dispose();
           Navigator.of(context).pop();
-          _loadInterstitialAd(); // Load the next ad
+          _loadInterstitialAd();
         },
       );
       _interstitialAd!.show();
@@ -72,6 +71,53 @@ class _ImageFeatureState extends State<ImageFeature> {
     _interstitialAd?.dispose();
     super.dispose();
   }
+
+ void _showReportDialog() {
+  final TextEditingController _reportController = TextEditingController();
+
+  showDialog(
+    context: context,
+    builder: (context) => AlertDialog(
+      title: Text("Report Content",
+          style: GoogleFonts.hankenGrotesk(
+              fontSize: 18, fontWeight: FontWeight.bold)),
+      content: TextField(
+        controller: _reportController,
+        maxLines: 3,
+        decoration: InputDecoration(
+          hintText: "Describe the issue...",
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          child: Text("Cancel",
+              style: TextStyle(color: Colors.grey, fontSize: 14)),
+        ),
+        ElevatedButton(
+          onPressed: () {
+            final issueDescription = _reportController.text.trim();
+            if (issueDescription.isNotEmpty) {
+              _c.submitReport(issueDescription); // Call the Firestore method
+              Navigator.of(context).pop();
+            } else {
+              Get.snackbar("Error", "Please describe the issue.",
+                  backgroundColor: Colors.red.withOpacity(0.7),
+                  colorText: Colors.white);
+            }
+          },
+          child: Text("Submit"),
+        ),
+      ],
+    ),
+  );
+}
+
 
   @override
   Widget build(BuildContext context) {
@@ -110,28 +156,53 @@ class _ImageFeatureState extends State<ImageFeature> {
           ),
         ),
       ),
-      floatingActionButton: Obx(() => _c.status.value == Status.complete
-          ? Padding(
+      floatingActionButton: Obx(
+        () => Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (_c.status.value == Status.complete)
+              Padding(
+                padding: const EdgeInsets.only(right: 6, bottom: 6),
+                child: FloatingActionButton(
+                  onPressed: () async {
+                    if (await PermissionManager
+                        .requestStoragePermission(context)) {
+                      _c.downloadImage();
+                    }
+                  },
+                  backgroundColor: Colors.purple.shade600,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(15),
+                    ),
+                  ),
+                  child: const Icon(
+                    Icons.save_alt_rounded,
+                    color: Colors.white,
+                    size: 26,
+                  ),
+                ),
+              ),
+            Padding(
               padding: const EdgeInsets.only(right: 6, bottom: 6),
               child: FloatingActionButton(
-                onPressed: () {
-                  FocusScope.of(context).unfocus();
-                  // _c.downloadImage();
-                },
-                backgroundColor: Colors.purple.shade600,
+                onPressed: _showReportDialog,
+                backgroundColor: Colors.redAccent,
                 shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(
                     Radius.circular(15),
                   ),
                 ),
                 child: const Icon(
-                  Icons.save_alt_rounded,
+                  Icons.flag,
                   color: Colors.white,
                   size: 26,
                 ),
               ),
-            )
-          : const SizedBox()),
+            ),
+          ],
+        ),
+      ),
       body: ListView(
         physics: const BouncingScrollPhysics(),
         padding: EdgeInsets.only(
@@ -173,7 +244,7 @@ class _ImageFeatureState extends State<ImageFeature> {
               ),
             ),
           ),
-          Container(
+          SizedBox(
             height: mq.height * .5,
             child: Obx(() => _aiImage()),
           ),

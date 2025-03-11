@@ -43,7 +43,7 @@ class ChatProvider extends ChangeNotifier {
   GenerativeModel? _visionModel;
 
   // current mode
-  String _modelType = 'gemini-pro';
+  String _modelType = 'gemini-2.0-flash';
 
   // loading bool
   bool _isLoading = false;
@@ -124,7 +124,7 @@ class ChatProvider extends ChangeNotifier {
     if (isTextOnly) {
       _model = _textModel ??
           GenerativeModel(
-              model: setCurrentModel(newModel: 'gemini-1.0-pro'),
+              model: setCurrentModel(newModel: 'gemini-2.0-flash'),
               apiKey: apiKey,
               generationConfig: GenerationConfig(
                 temperature: 0.4,
@@ -139,7 +139,7 @@ class ChatProvider extends ChangeNotifier {
     } else {
       _model = _visionModel ??
           GenerativeModel(
-              model: setCurrentModel(newModel: 'gemini-1.5-flash'),
+              model: setCurrentModel(newModel: 'gemini-2.0-flash'),
               apiKey: apiKey,
               generationConfig: GenerationConfig(
                 temperature: 0.4,

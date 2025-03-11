@@ -10,56 +10,60 @@ import 'package:docx_to_text/docx_to_text.dart';
 import 'package:file_picker/file_picker.dart';
 
 class SummaryService {
+  final String modelName = 'gemini-2.0-flash';
 
-  final String modelName = 'gemini-pro';
+  Future<String> summarizeDocument(
+      PlatformFile file, double summaryLength, int detailLevel) async {
+    try {
+      if (file.path == null) {
+        throw Exception('File path is null!');
+      }
 
-Future<String> summarizeDocument(PlatformFile file, double summaryLength, int detailLevel) async {
-  try {
-    if (file.path == null) {
-      throw Exception('File path is null');
+      final fileBytes = await File(file.path!).readAsBytes();
+      final fileExtension = file.extension?.toLowerCase();
+
+      if (fileExtension == null) {
+        throw Exception('File extension is null');
+      }
+
+      final documentContent = await processDocument(fileBytes, fileExtension);
+
+      final prompt =
+          "Summarize the following text and keep the summary within ${summaryLength * 100}% of the original text length. Adjust the level of detail based on the provided detail level ($detailLevel):\n\n$documentContent";
+      final apiKey = await AppWrite.getChatApiKey();
+      final response = await http.post(
+        Uri.parse(
+            'https://generativelanguage.googleapis.com/v1/models/$modelName:generateContent'),
+        headers: {
+          'Content-Type': 'application/json',
+          'x-goog-api-key': apiKey, // Use this instead of 'Authorization'
+        },
+        body: jsonEncode({
+          'contents': [
+            {
+              'parts': [
+                {'text': prompt}
+              ]
+            }
+          ]
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        final responseData = jsonDecode(response.body);
+        return responseData['candidates'][0]['content']['parts'][0]['text'] ??
+            'No summary available';
+      } else {
+        throw Exception('Failed to generate summary: ${response.body}');
+      }
+    } catch (e) {
+      print('Error summarizing document: $e');
+      throw Exception('Error summarizing document: $e');
     }
-    
-    final fileBytes = await File(file.path!).readAsBytes();
-    final fileExtension = file.extension?.toLowerCase();
-
-    if (fileExtension == null) {
-      throw Exception('File extension is null');
-    }
-
-    final documentContent = await processDocument(fileBytes, fileExtension);
-
-    final prompt = "Summarize the following text and keep the summary within ${summaryLength * 100}% of the original text length. Adjust the level of detail based on the provided detail level ($detailLevel):\n\n$documentContent";
- final apiKey = await AppWrite.getChatApiKey();
-   final response = await http.post(
-      Uri.parse('https://generativelanguage.googleapis.com/v1/models/$modelName:generateContent'),
-      headers: {
-        'Content-Type': 'application/json',
-        'x-goog-api-key': apiKey, // Use this instead of 'Authorization'
-      },
-      body: jsonEncode({
-        'contents': [
-          {
-            'parts': [
-              {'text': prompt}
-            ]
-          }
-        ]
-      }),
-    );
-
-    if (response.statusCode == 200) {
-      final responseData = jsonDecode(response.body);
-      return responseData['candidates'][0]['content']['parts'][0]['text'] ?? 'No summary available';
-    } else {
-      throw Exception('Failed to generate summary: ${response.body}');
-    }
-  } catch (e) {
-    print('Error summarizing document: $e');
-    throw Exception('Error summarizing document: $e');
   }
-}
 
-  Future<String> processDocument(Uint8List fileBytes, String fileExtension) async {
+  Future<String> processDocument(
+      Uint8List fileBytes, String fileExtension) async {
     switch (fileExtension) {
       case 'pdf':
         return await processPdf(fileBytes);
